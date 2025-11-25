@@ -1,0 +1,917 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Learning Hub:For Beginners — Updated Mobile Sizes</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20version='1.1'%20id='Icons'%20xmlns='http://www.w3.org/2000/svg'%20viewBox='-3.2%20-3.2%2038.40%2038.40'%20fill='%23421bd0'%3E%3C/svg%3E">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    :root{--bg:#071124;--muted:#9fb0d3;--panel:rgba(255,255,255,0.03);--glass:rgba(255,255,255,0.04);--accent:#7c5cff}
+    *{box-sizing:border-box}html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial;background:linear-gradient(180deg,var(--bg),#021022);color:#eaf4ff}
+    a{color:inherit}
+
+    /* Layout */
+    header{position:fixed;left:0;right:0;top:0;height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 20px;background:linear-gradient(180deg,rgba(2,6,23,0.5),transparent);backdrop-filter:blur(6px);z-index:60}
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{width:44px;height:44;border-radius:8px;background:linear-gradient(90deg,var(--accent),#2be7d2);display:flex;align-items:center;justify-content:center;font-weight:800;color:#041226;font-size:14px}
+    nav{display:flex;gap:18px;align-items:center}
+    nav a{padding:8px 10px;border-radius:8px;text-decoration:none;color:var(--muted);font-weight:600}
+    nav a.active{background:var(--glass);color:#fff}
+
+    /* mobile nav */
+    .nav-toggle{display:none;background:transparent;border:0;color:var(--muted);font-size:20px;cursor:pointer}
+    .mobile-nav{display:none;position:fixed;top:64px;right:12px;background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.03);padding:10px;border-radius:10px;box-shadow:0 8px 30px rgba(2,6,23,0.6)}
+    .mobile-nav a{display:block;padding:8px 10px}
+
+    main{padding-top:84px}
+    .container{max-width:1200px;margin:32px auto;padding:0 20px}
+
+    /* Home stage */
+    .stage{display:grid;grid-template-columns:1fr 420px;gap:28px;align-items:center}
+    .card{background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);padding:18px;border-radius:14px;border:1px solid rgba(255,255,255,0.03)}
+    .stage-left{height:520px;position:relative}
+    .stage-right{display:flex;flex-direction:column;gap:12px}
+    .hint{color:var(--muted);font-size:14px}
+
+    /* Page sections */
+    .page{display:none;padding:48px 0}
+    .page.active{display:block}
+    .heroPage{position:relative;padding:48px;border-radius:12px;overflow:hidden}
+    .bgLogo{position:absolute;inset:0;display:block;background-position:center;background-repeat:no-repeat;background-size:50%;opacity:0.08;filter:blur(6px);transform:scale(1.05)}
+    .contentCard{position:relative;background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);padding:28px;border-radius:12px;border:1px solid rgba(255,255,255,0.03)}
+
+    h1{margin:0 0 12px}
+    p.lead{color:var(--muted)}
+
+    table{width:100%;border-collapse:collapse;margin-top:16px}
+    table th, table td{padding:10px 12px;border-bottom:1px solid rgba(255,255,255,0.03);text-align:left}
+
+    /* responsive */
+    @media (max-width:980px){
+      .stage{grid-template-columns:1fr}
+      .stage-left{height:360px}
+      .stage-right{order:2}
+      nav{display:none}
+      .nav-toggle{display:block}
+    }
+
+    @media (max-width:720px){
+      .container{margin:16px auto;padding:0 14px}
+      .stage-left{height:44vh}
+      #cubeWrap{min-height:260px}
+      .html{
+        width: 100%;
+        margin: auto;
+
+      }
+      .github{
+        width: 100vw;
+        margin: auto;
+
+      }
+    }
+
+    /* Footer */
+    footer{text-align:center;padding:40px 20px;color:var(--muted)}
+
+    /* --- Inserted roadmap styles (scoped) --- */
+    .py-roadmap-wrap{max-width:100%;display:grid;grid-template-columns:1fr 320px;gap:18px;align-items:start}
+    @media (max-width:980px){ .py-roadmap-wrap{grid-template-columns:1fr} }
+
+    .py-content{background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));padding:18px;border-radius:12px;border:1px solid rgba(255,255,255,0.03)}
+    .progressWrap{display:flex;align-items:center;gap:12px;margin:6px 0 14px}
+    .progress{flex:1;height:10px;background:rgba(255,255,255,0.04);border-radius:999px;overflow:hidden}
+    .progress > i{display:block;height:100%;width:0%;background:linear-gradient(90deg,var(--accent),#06b6d4);border-radius:999px;animation:py-fill 1.6s ease forwards}
+    @keyframes py-fill{from{width:0%}to{width:100%}}
+
+    .weeks{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+    @media (max-width:720px){ .weeks{grid-template-columns:1fr} }
+
+    .week{background:#071228;border:1px solid rgba(255,255,255,0.03);padding:12px;border-radius:10px;cursor:pointer;position:relative;overflow:hidden;transition:transform .25s,box-shadow .25s,opacity .35s;opacity:0;transform:translateY(12px)}
+    .week.show{opacity:1;transform:none}
+    .week:hover{transform:translateY(-6px);box-shadow:0 10px 30px rgba(2,6,23,0.6)}
+    .week h4{margin:0 0 6px 0}
+    .week p{margin:0;color:var(--muted);font-size:13px}
+    .details{margin-top:10px;max-height:0;overflow:hidden;transition:max-height .45s ease;padding-right:6px}
+    .week.open .details{max-height:420px}
+    .list{margin:8px 0 0 18px;color:#cfe6ff;font-size:14px}
+    .muted-small{color:var(--muted);font-size:13px;margin-top:12px}
+
+    .py-sidebar{padding:12px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:10px}
+    .py-btn{background:linear-gradient(90deg,var(--accent),#06b6d4);padding:8px 10px;border-radius:8px;border:none;color:white;cursor:pointer}
+    .sparkle{display:inline-block;opacity:0;transform:translateY(-6px);animation:py-pop 1.2s ease both}
+    @keyframes py-pop{0%{opacity:0;transform:translateY(-8px) scale(.95)}60%{opacity:1;transform:translateY(0) scale(1.02)}100%{transform:scale(1)}}
+    /* --- end roadmap styles --- */
+
+    /* small utilities */
+    .visually-hidden{position:absolute;height:1px;width:1px;overflow:hidden;clip:rect(1px,1px,1px,1px)}
+
+    /* ===== enhance mobile readability ===== */
+    @media (max-width:720px){
+      /* enlarge header brand & logo on phones */
+      .brand { gap:10px; }
+      .brand .logo { width:56px; height:56px; font-size:18px; border-radius:10px; }
+      .brand strong { font-size:18px; line-height:1; }
+      .brand div[style] { font-size:13px; } /* the small tech list under Learning Hub */
+
+      /* make nav links easier to tap/read */
+      nav a { font-size:15px; padding:10px 12px; }
+      .mobile-nav a { font-size:16px; padding:12px 14px; }
+
+      /* increase roadmap text & controls on small screens */
+      .py-content h1 { font-size:18px; }
+      .py-week h4 { font-size:16px; }
+      .py-week p { font-size:14px; }
+      .list { font-size:15px; }
+      .py-sidebar { min-width:180px; font-size:14px; }
+
+      /* give the 3D canvas more room on phones */
+      .stage-left { height:56vh; }
+      #cubeWrap, #vpy-three-canvas, #cubeCanvas { min-height:320px; height:56vh; }
+
+      /* Improve the clickable weeks layout */
+      .weeks { grid-template-columns:1fr; gap:12px; }
+
+      /* make buttons slightly larger for touch */
+      .py-btn { padding:10px 12px; font-size:15px; border-radius:10px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand"><div class="logo"><a href="#home" data-target="home" style="text-decoration: none;color:inherit;">LH</a></div><div><strong>Learning Hub</strong><div style="font-size:12px;color:var(--muted); color: #ba1e5c;">HTML • CSS • JS • React • Python • AI</div></div></div>
+
+    <!-- desktop nav -->
+    <nav id="mainNav">
+      <a href="#home" data-target="home" class="active">Home</a>
+      <a href="#web" data-target="web">Frontend Developer</a>
+      <a href="#version" data-target="version">Version Controls</a>
+      <a href="#python" data-target="python">Python Roadmap</a>
+      <a href="#ai" data-target="ai">Python & AI</a>
+    </nav>
+
+    <!-- mobile toggle -->
+    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="mobileNav">☰</button>
+    <nav id="mobileNav" class="mobile-nav" aria-hidden="true">
+      <a href="#home" data-target="home">Home</a>
+      <a href="#web" data-target="web">Frontend</a>
+      <a href="#version" data-target="version">Version Controls</a>
+      <a href="#python" data-target="python">Python</a>
+      <a href="#ai" data-target="ai">AI</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <!-- HOME -->
+    <section id="home" class="page active">
+      <div class="stage">
+        <div class="card stage-left">
+
+<style>
+  /* Scoped styles */
+  #cubeWrap { width:100%; height:100%; min-height:360px; border-radius:12px; overflow:hidden; position:relative; background:linear-gradient(180deg,#071428,#021021); }
+  #cubeCanvas { width:100%; height:100%; display:block; }
+  #cubeStatus { position:absolute; right:12px; top:12px; padding:8px 12px; border-radius:8px; background:rgba(0,0,0,0.45); color:#fff; font-size:13px; opacity:0; transition:opacity .2s; pointer-events:none; }
+</style>
+
+<div id="cubeWrap" aria-label="3x3 cube widget">
+  <canvas id="cubeCanvas" role="img" aria-hidden="true"></canvas>
+  <div id="cubeStatus" aria-hidden="true"></div>
+</div>
+<script>
+(function(){
+  function loadThree(cb){
+    if(window.THREE) return cb();
+    const s=document.createElement('script');
+    s.src="https://cdn.jsdelivr.net/npm/three@0.154.0/build/three.min.js";
+    s.onload=cb; document.head.appendChild(s);
+  }
+
+  loadThree(init);
+
+  function init(){
+    const canvas = document.getElementById("cubeCanvas");
+    const wrap   = document.getElementById("cubeWrap");
+    if(!canvas || !wrap) return;
+
+    const renderer = new THREE.WebGLRenderer({ canvas, antialias:true, alpha:true });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(45,1,0.1,100); camera.position.set(0,0,8);
+
+    const hemi = new THREE.HemisphereLight(0xffffff,0x080820,0.9);
+    const dir  = new THREE.DirectionalLight(0xffffff,0.8); dir.position.set(5,5,5);
+    scene.add(hemi,dir);
+
+    function makeFace(label,bg,fg){
+      const size=768; const c=document.createElement("canvas"); c.width=c.height=size; const ctx=c.getContext("2d");
+      ctx.fillStyle=bg; ctx.fillRect(0,0,size,size);
+      ctx.strokeStyle="rgba(255,255,255,0.06)"; ctx.lineWidth=6;
+      const cell=size/3; for(let i=1;i<3;i++){ ctx.beginPath(); ctx.moveTo(i*cell,0); ctx.lineTo(i*cell,size); ctx.stroke(); ctx.beginPath(); ctx.moveTo(0,i*cell); ctx.lineTo(size,i*cell); ctx.stroke(); }
+
+      // responsive fonts
+      const mainFont = Math.max(32, Math.round(size / 6));
+      ctx.fillStyle=fg; ctx.font = `bold ${mainFont}px Arial`; ctx.textAlign="center"; ctx.textBaseline="middle"; ctx.fillText(label,size/2,size/2);
+
+      const captionFont = Math.max(12, Math.round(size / 36)); ctx.font = `${captionFont}px Arial`; ctx.fillStyle = 'rgba(255,255,255,0.9)'; ctx.fillText(label, size/2, size - 28);
+      return new THREE.CanvasTexture(c);
+    }
+
+    const mats = [
+      new THREE.MeshStandardMaterial({map:makeFace("HTML","#e34f26","#fff")}),
+      new THREE.MeshStandardMaterial({map:makeFace("CSS","#1572b6","#fff")}),
+      new THREE.MeshStandardMaterial({map:makeFace("JS","#f0db4f","#111")}),
+      new THREE.MeshStandardMaterial({map:makeFace("REACT","#61dafb","#041226")}),
+      new THREE.MeshStandardMaterial({map:makeFace("PYTHON","#306998","#ffd43b")}),
+      new THREE.MeshStandardMaterial({map:makeFace("AI","#222","#fff")})
+    ];
+
+    const geo = new THREE.BoxGeometry(4,4,4);
+    const cube = new THREE.Mesh(geo,mats);
+    const edges = new THREE.EdgesGeometry(geo);
+    const line  = new THREE.LineSegments(edges,new THREE.LineBasicMaterial({color:0x0a2540}));
+    const group = new THREE.Group(); group.add(cube,line); scene.add(group);
+
+    function resize(){
+      const w = wrap.clientWidth; const h = wrap.clientHeight; renderer.setSize(w,h,false); camera.aspect = w/h; camera.updateProjectionMatrix(); }
+    new ResizeObserver(resize).observe(wrap); resize();
+
+    let drag=false, prev={x:0,y:0};
+    canvas.addEventListener("pointerdown",e=>{ drag=true; prev.x=e.clientX; prev.y=e.clientY; canvas.setPointerCapture?.(e.pointerId); });
+    canvas.addEventListener("pointerup",e=>{ drag=false; canvas.releasePointerCapture?.(e.pointerId); });
+    canvas.addEventListener("pointermove",e=>{ if(!drag) return; cube.rotation.y += (e.clientX - prev.x)/200; cube.rotation.x += (e.clientY - prev.y)/200; prev.x=e.clientX; prev.y=e.clientY; });
+
+    const ray = new THREE.Raycaster(); const mouse = new THREE.Vector2();
+    canvas.addEventListener("pointerdown",e=>{
+      const rect = canvas.getBoundingClientRect(); mouse.x = ((e.clientX - rect.left) / rect.width) * 2 - 1; mouse.y = -((e.clientY - rect.top) / rect.height) * 2 + 1; ray.setFromCamera(mouse, camera); const hits = ray.intersectObject(cube, true);
+      if(hits.length){ const faceIndex = Math.floor(hits[0].faceIndex / 2); const mapping = ['web','web','web','web','python','ai']; const target = mapping[faceIndex] || 'home'; location.hash = target; }
+    });
+
+    const clock=new THREE.Clock(); const speed=1.5;
+    (function render(){ requestAnimationFrame(render); if(!drag){ group.rotation.y += 0.008 * speed; group.rotation.x += Math.sin(clock.getElapsedTime()*0.5)*0.002 * speed; } renderer.render(scene,camera); })();
+  }
+})();
+</script>
+
+        </div>
+        <div class="stage-right">
+          <div class="card">
+            <h2 style="color: white;">A Quick Road Map For Freshers and Beginners </h2>
+            <p class="hint">This demo shows an interactive cube made of a 3×3 visual grid on each face; each face represents a technology — HTML, CSS, JavaScript, React.js, Python and AI. Cube rotates at speed 1.5 (multiplier).</p>
+            <p style="margin-top:12px;color:var(--muted)">Click any face to navigate to the corresponding roadmap or use the navbar.</p>
+          </div>
+          <div class="card">
+            <h3 style="color: whitesmoke;">Quick Links</h3>
+            <ul style="margin:8px 0 0 16px;color:var(--muted)">
+              <li><a href="#python" data-target="python">Python Roadmap</a></li>
+              <li><a href="#version" data-target="version">Version Controls (Git & GitHub)</a></li>
+              <li><a href="#web" data-target="web">Web End-to-End</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PYTHON ROADMAP (expanded details) -->
+    <section id="python" class="page heroPage">
+      <div class="bgLogo" style="background-image: url('data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 200 200\'><text x=\'50%\' y=\'55%\' dominant-baseline=\'middle\' text-anchor=\'middle\' font-size=36 fill=\'#306998\' font-family=Arial>PYTHON</text></svg>');"></div>
+
+      <!-- BEGIN inserted roadmap -->
+      <div class="py-roadmap-wrap">
+        <div class="py-content">
+            <div style="display:flex;gap:12px;align-items:center;margin-bottom:8px">
+              <div style="width:56px;height:56px;border-radius:10px;background:linear-gradient(90deg,var(--accent),#2be7d2);display:flex;align-items:center;justify-content:center;font-weight:700;color:#041226">Py</div>
+              <div>
+                <h1 style="margin:0;font-size:20px">Python Roadmap — 10-Week Modules <span class="sparkle">✨</span></h1>
+                <div class="muted-small">Structured path from fundamentals to advanced topics. Click any week to expand details.</div>
+              </div>
+            </div>
+
+          <div class="progressWrap">
+            <div class="muted-small">10-week plan</div>
+            <div class="progress" aria-hidden><i></i></div>
+          </div>
+          <div class="weeks" id="weeks">
+            <!-- Weeks... (same content as before) -->
+            <!-- Week 1 -->
+            <div class="week" data-week="1">
+              <h4>Week 1 — Python Basics</h4>
+              <p>Installation, syntax, variables, operators, basic I/O.</p>
+              <div class="details">
+                <ul class="list">
+                  <li>Install Python, VS Code, pip, virtualenv</li>
+                  <li>Syntax, variables, types (int, float, str, bool)</li>
+                  <li>Input/output, string formatting, basic scripts</li>
+                  <li>Mini project: Simple calculator & pattern printing</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Week 2 -->
+            <div class="week" data-week="2">
+              <h4>Week 2 — Control Flow & Data Structures</h4>
+              <p>Conditionals, loops, lists, tuples, sets, dicts.</p>
+              <div class="details">
+                <ul class="list">
+                  <li>if/else, nested conditions</li>
+                  <li>for & while loops, break/continue</li>
+                  <li>List/dict comprehensions</li>
+                  <li>Mini project: Student marks analyzer</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Week 3 -->
+            <div class="week" data-week="3">
+              <h4>Week 3 — Functions & Modules</h4>
+              <p>Functions, higher-order functions, modules, file I/O.</p>
+              <div class="details">
+                <ul class="list">
+                  <li>Defining functions, args/kwargs, return values</li>
+                  <li>Lambda, map, filter, reduce</li>
+                  <li>Creating and importing modules & packages</li>
+                  <li>File handling: open/read/write, JSON</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Week 4 -->
+            <div class="week" data-week="4">
+              <h4>Week 4 — Object-Oriented Programming</h4>
+              <p>Classes, inheritance, dunder methods and design basics.</p>
+              <div class="details">
+                <ul class="list">
+                  <li>Classes, instances, constructors</li>
+                  <li>Inheritance, polymorphism, encapsulation</li>
+                  <li>Magic methods (__str__, __repr__, __eq__)</li>
+                  <li>Mini project: Library management system</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Week 5 -->
+            <div class="week" data-week="5">
+              <h4>Week 5 — Standard Library & Utilities</h4>
+              <p>OS, datetime, itertools, decorators, generators.</p>
+              <div class="details">
+                <ul class="list">
+                  <li>OS, shutil, pathlib, datetime</li>
+                  <li>Iterators, generators, decorators</li>
+                  <li>Working with CSV, JSON, XML</li>
+                  <li>Mini project: File organizer CLI</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Week 6 -->
+            <div class="week" data-week="6">
+              <h4>Week 6 — Databases & APIs</h4>
+              <p>SQL basics, SQLite/MySQL, requests, building APIs with Flask.</p>
+              <div class="details">
+                <ul class="list">
+                  <li>SQL CRUD, joins, indexes</li>
+                  <li>sqlite3/MySQL connector usage</li>
+                  <li>Requests library, consuming APIs</li>
+                  <li>Build a basic REST API with Flask</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Week 7 -->
+            <div class="week" data-week="7">
+              <h4>Week 7 — Web Development (Flask)</h4>
+              <p>Routing, templates, forms, authentication basics.</p>
+              <div class="details">
+                <ul class="list">
+                  <li>Flask app structure, routing</li>
+                  <li>Jinja templating, static files</li>
+                  <li>Form handling, sessions, simple auth</li>
+                  <li>Mini project: Login system + dashboard</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Week 8 -->
+            <div class="week" data-week="8">
+              <h4>Week 8 — Testing, Debugging & Deployment</h4>
+              <p>pytest, logging, Docker, CI/CD basics.</p>
+              <div class="details">
+                <ul class="list">
+                  <li>Unit testing with pytest, test structure</li>
+                  <li>Logging, pdb, debugging techniques</li>
+                  <li>Dockerize an app, GitHub Actions basics</li>
+                  <li>Deploy to Render/Railway/Heroku</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Week 9 -->
+            <div class="week" data-week="9">
+              <h4>Week 9 — Advanced Python & Performance</h4>
+              <p>Typing, async, concurrency, design patterns, profiling.</p>
+              <div class="details">
+                <ul class="list">
+                  <li>Type hints & typing module, mypy basics</li>
+                  <li>Asyncio: event loop, async/await, tasks</li>
+                  <li>Concurrency: threading vs multiprocessing</li>
+                  <li>Profiling & optimization (cProfile, timeit), memory tips</li>
+                  <li>Common design patterns in Python</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Week 10 -->
+            <div class="week" data-week="10">
+              <h4>Week 10 — Capstone & Career</h4>
+              <p>Build a capstone, portfolio, interview prep and open-source.</p>
+              <div class="details">
+                <ul class="list">
+                  <li>End-to-end capstone: plan → build → test → deploy</li>
+                  <li>Documentation, README, hosted demo (Streamlit/Flask)</li>
+                  <li>Resume, GitHub portfolio, interview practice</li>
+                  <li>Contribute to open-source, keep learning (advanced topics)</li>
+                </ul>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="muted-small">Tip: Expand weeks as you learn. Do the mini-projects — they matter more than theory alone.</div>
+        </div>
+
+        <aside class="py-sidebar" style="min-width:220px">
+          <h3 style="margin-top:0">Controls</h3>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <button class="py-btn" id="pyExpandAll">Expand All</button>
+            <button class="py-btn" id="pyCollapseAll">Collapse All</button>
+            <button class="py-btn" id="pyPrint">Print / Export</button>
+          </div>
+
+          <div style="margin-top:12px">
+            <h4 style="margin:8px 0 6px 0">Extras</h4>
+            <p class="muted-small">Use this 10-week plan as a minimum viable curriculum — add your timeline and stretch topics as needed.</p>
+          </div>
+
+          <footer style="margin-top:12px;color:var(--muted)"><div>Created for: Vishnu</div></footer>
+        </aside>
+      </div>
+      <!-- END inserted roadmap -->
+
+    </section>
+
+    <!-- VERSION CONTROL (expanded) -->
+ <section id="version" class="page heroPage github">
+      <div class="bgLogo" style="background-image: url('data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 200 200\'><g><text x=\'50%\' y=\'42%\' dominant-baseline=\'middle\' text-anchor=\'middle\' font-size=28 fill=\'#f1502f\' font-family=Arial>GIT</text><text x=\'50%\' y=\'62%\' dominant-baseline=\'middle\' text-anchor=\'middle\' font-size=20 fill=\'#222\' font-family=Arial>GITHUB</text></g></svg>');"></div>
+      <div class="contentCard">
+        <h1>Version Control — Git & GitHub (Detailed)</h1>
+        <p class="lead">From local commits to advanced collaboration flows and CI integration.</p>
+
+        <h3>Core Concepts</h3>
+        <ul>
+          <li>Repository lifecycle: init, clone, commit, branch</li>
+          <li>Branching strategies: Git Flow, trunk-based development</li>
+          <li>Merging vs Rebase and when to use each</li>
+        </ul>
+
+        <h3>Remote Collaboration</h3>
+        <ul>
+          <li>Remote origins, fetch, push, pull</li>
+          <li>Pull requests, code review, protecting branches</li>
+          <li>Forking workflow, managing contributors</li>
+        </ul>
+
+        <h3>Advanced</h3>
+        <ul>
+          <li>Stashing, cherry-pick, revert, bisect</li>
+          <li>Git hooks, submodules, large file storage (LFS)</li>
+          <li>CI with GitHub Actions — run tests and lint on PR</li>
+        </ul>
+
+        <h3>Hands-on Roadmap</h3>
+        <ol>
+          <li>Setup local repo & push to GitHub</li>
+          <li>Create branches & PRs, do code reviews</li>
+          <li>Set up CI checks (GitHub Actions) for testing</li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- WEB END-TO-END (expanded) -->
+     <section id="web" class="page heroPage html">
+      <div class="bgLogo" style="background-image: url('data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 300 120\'><g font-family=Arial><text x=\'30\' y=\'40\' font-size=26 fill=\'#e34f26\'>HTML</text><text x=\'110\' y=\'40\' font-size=26 fill=\'#1572b6\'>CSS</text><text x=\'190\' y=\'40\' font-size=26 fill=\'#f0db4f\'>JS</text><text x=\'80\' y=\'90\' font-size=26 fill=\'#61dafb\'>React</text></g></svg>');"></div>
+      <div class="contentCard">
+        <h1>Web End-to-End Roadmap — Detailed</h1>
+        <p class="lead">Step-by-step frontend to backend learning path with practical projects and tooling.</p>
+
+        <h3>Frontend</h3>
+        <ul>
+          <li>HTML: semantic markup, accessibility, SEO basics</li>
+          <li>CSS: layout (Flexbox, Grid), responsive design, animations, preprocessors</li>
+          <li>JavaScript: ES6+, modules, DOM, async/await, fetch</li>
+          <li>React: components, hooks, context, routing, performance optimizations</li>
+        </ul>
+        <h3>Frontend Road Map</h3>
+        <details>
+            <summary>HTML</summary>
+            <ul >
+                <li>Day-1:HTML-Introduction</li>
+                <li>Day-2:HTML-tags</li>
+                <li>Day-3HTML-Imgae tags and Elements</li>
+                <li>Day-4:Lists, Tables, Details Summary tag</li>
+                <li>Day-5:Semantic and non semantic</li>
+                <li>Day-6:Forms</li>
+                <li>Day-7:Meta tags</li>
+            </ul>
+        </details>
+        <details>
+            <summary>CSS</summary>
+            <ul >
+                <li>Day-1:CSS Introduction</li>
+                <li>Day-2:CSS Selectors</li>
+                <li>Day-3:Box Model</li>
+                <li>Day-4:Flexbox</li>
+                <li>Day-5:Grid</li>
+                <li>Day-6:Responsive Design</li>
+                <li>Day-7:CSS Animations & CSS BootStrap</li>
+            </ul>
+        </details>
+        <details>
+            <summary>JavaScript</summary>
+            <ul >
+                <li>Day-1:JS Introduction</li>
+                <li>Day-2:Data Types and Variables</li>
+                <li>Day-3:Operators</li>
+                <li>Day-4:Control Flow and JSON</li>
+                <li>Day-5:Error Handling and  ES6 Essentials</li>
+                <li>Day-6:Asynchronous JS and Local Storage</li>
+                <li>Day-7:Modules(import and Export)</li>
+                <li>Classes(OOPS)</li>
+            </ul>
+        </details>
+        <p>Project: Build a responsive portfolio site with HTML, CSS, and vanilla JS.</p>
+
+      <details>
+    <summary>MySQL</summary>
+    <ul>
+        <li>Day-1: Introduction, Installation & Basic SQL Syntax</li>
+        <li>Day-2: Creating Databases & Tables + Data Types</li>
+        <li>Day-3: CRUD Operations (SELECT, INSERT, UPDATE, DELETE)</li>
+        <li>Day-4: Filtering & Sorting (WHERE, LIKE, ORDER BY, LIMIT)</li>
+        <li>Day-5: Joins (INNER, LEFT, RIGHT) + GROUP BY & Aggregate Functions</li>
+        <li>Day-6: Subqueries, Keys </li>    </ul>
+</details>
+
+      <details>
+    <summary>React</summary>
+    <ul>
+        <li>Day-1: React Introduction, Setup, JSX & Rendering Elements</li>
+        <li>Day-2: Components, Props & Rendering Lists (map, keys)</li>
+        <li>Day-3: State, useState & Lifecycle (useEffect Basics)</li>
+        <li>Day-4: Event Handling, Conditional Rendering & Controlled Forms</li>
+        <li>Day-5: Routing with React Router</li>
+        <li>Day-6: Hooks (useEffect deep dive, useContext) & Props Drilling Problem</li>
+        <li>Day-7: Context API, Basic Performance Optimization & Project Structure</li>
+    </ul>
+</details>
+        <p>Project: Build a React blog with routing and state management.</p>
+      </div>
+    </section>
+
+    <!-- PYTHON & AI -->
+    <section id="ai" class="page heroPage">
+      <div class="bgLogo" style="background-image: url('data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 200 200\'><text x=\'50%\' y=\'55%\' dominant-baseline=\'middle\' text-anchor=\'middle\' font-size=36 fill=\'#ffffff\' font-family=Arial>AI</text></svg>');"></div>
+      <div class="contentCard">
+        <h1>Python & AI — Detailed</h1>
+        <p class="lead">Hands-on AI topics and Python tooling for data science and machine learning projects.</p>
+       <!-- ====== START: Insertable Python+AI Roadmap (paste at line ~522) ====== -->
+
+<style>
+/* Scoped roadmap styles (prefix: vpy-) */
+:root{--vpy-accent:#6c5ce7}
+.vpy-roadmap-wrap{max-width:100%;display:grid;grid-template-columns:1fr 320px;gap:18px;align-items:start;margin-top:12px}
+@media (max-width:980px){ .vpy-roadmap-wrap{grid-template-columns:1fr} }
+.vpy-content{background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));padding:18px;border-radius:12px;border:1px solid rgba(255,255,255,0.03)}
+.vpy-progressWrap{display:flex;align-items:center;gap:12px;margin:6px 0 14px}
+.vpy-progress{flex:1;height:10px;background:rgba(255,255,255,0.04);border-radius:999px;overflow:hidden}
+.vpy-progress>i{display:block;height:100%;width:0%;background:linear-gradient(90deg,var(--vpy-accent),#2be7d2);border-radius:999px;animation:vpy-pfill 1.6s ease forwards}
+@keyframes vpy-pfill{from{width:0}to{width:100%}}
+.vpy-weeks{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+@media (max-width:720px){ .vpy-weeks{grid-template-columns:1fr} }
+.vpy-week{background:#071228;border:1px solid rgba(255,255,255,0.03);padding:12px;border-radius:10px;cursor:pointer;position:relative;overflow:hidden;transition:transform .25s,box-shadow .25s,opacity .35s;opacity:0;transform:translateY(12px)}
+.vpy-week.show{opacity:1;transform:none}
+.vpy-week:hover{transform:translateY(-6px);box-shadow:0 10px 30px rgba(2,6,23,0.6)}
+.vpy-week h4{margin:0 0 6px 0}
+.vpy-week p{margin:0;color:var(--vpy-accent);font-size:13px}
+.vpy-details{margin-top:10px;max-height:0;overflow:hidden;transition:max-height .45s ease;padding-right:6px}
+.vpy-week.vpy-open .vpy-details{max-height:420px}
+.vpy-list{margin:8px 0 0 18px;color:#cfe6ff;font-size:14px}
+.vpy-muted-small{color:#9fb0d3;font-size:13px;margin-top:12px}
+.vpy-sidebar{padding:12px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:10px}
+.vpy-btn{background:linear-gradient(90deg,var(--vpy-accent),#2be7d2);padding:8px 10px;border-radius:8px;border:none;color:#041226;cursor:pointer}
+.vpy-three-wrap{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:12px}
+#vpy-three-canvas{width:220px;height:220px;border-radius:12px;background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);display:block}
+.vpy-footer{font-size:13px;color:#9fb0d3;margin-top:12px}
+.vpy-week:focus{outline:2px solid rgba(99,102,241,0.35);outline-offset:3px}
+</style>
+
+<!-- load Three.js (non-module) so vpy script can use global THREE -->
+<script src="https://cdn.jsdelivr.net/npm/three@0.154.0/build/three.min.js"></script>
+
+<!-- Roadmap markup (paste into body where desired) -->
+<div class="vpy-roadmap-wrap" role="region" aria-label="Python AI Roadmap - Vishnu">
+  <div class="vpy-content">
+    <div style="display:flex;gap:12px;align-items:center;margin-bottom:8px">
+      <div style="width:56px;height:56px;border-radius:10px;background:linear-gradient(90deg,var(--vpy-accent),#2be7d2);display:flex;align-items:center;justify-content:center;font-weight:700;color:#041226">Py</div>
+      <div>
+        <h1 style="margin:0;font-size:20px">Python + AI Roadmap — Full Modules <span style="display:inline-block">🤖✨</span></h1>
+        <div class="vpy-muted-small">Complete learning path from Python basics to production-ready AI. Click any module to expand details.</div>
+      </div>
+    </div>
+
+    <div class="vpy-progressWrap">
+      <div class="vpy-muted-small">18-module curriculum</div>
+      <div class="vpy-progress" aria-hidden><i></i></div>
+    </div>
+
+    <div class="vpy-three-wrap" style="justify-content:space-between;align-items:center">
+      <canvas id="vpy-three-canvas" aria-hidden></canvas>
+
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <div style="display:flex;gap:8px">
+          <button class="vpy-btn" id="vpyExpandAll">Expand All</button>
+          <button class="vpy-btn" id="vpyCollapseAll">Collapse All</button>
+        </div>
+        <div style="display:flex;gap:8px;align-items:center">
+          <button class="vpy-btn" id="vpyPrint">Print / Export</button>
+          <div class="vpy-muted-small" style="margin-left:6px">Tip: Use Print to save as PDF</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="vpy-weeks" id="vpy-weeks">
+      <!-- Modules 1 - 18 -->
+      <div class="vpy-week" data-week="1" tabindex="0" role="button" aria-expanded="false">
+        <h4>Module 1 — Introduction to Python & AI</h4>
+        <p>What is Python, AI, ML, DL, tools setup.</p>
+        <div class="vpy-details" aria-hidden="true">
+          <ul class="vpy-list">
+            <li>Why Python is the go-to language for AI</li>
+            <li>AI vs ML vs Deep Learning (with examples)</li>
+            <li>Install Python, VS Code, Jupyter Notebook</li>
+            <li>Mini project: Hello Data notebook</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="vpy-week" data-week="2" tabindex="0" role="button" aria-expanded="false">
+        <h4>Module 2 — Python Foundations</h4>
+        <p>Syntax, variables, operators, I/O.</p>
+        <div class="vpy-details" aria-hidden="true">
+          <ul class="vpy-list">
+            <li>Types, control flow, f-strings</li>
+            <li>Functions, modules, virtualenv</li>
+            <li>Mini project: CLI calculator</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- (repeat weeks 3..18 similarly) -->
+      <!-- For brevity include full set — replace/extend as needed -->
+      <div class="vpy-week" data-week="3" tabindex="0" role="button"><h4>Module 3 — Data Structures & Algorithms</h4><p>Lists, tuples, dicts, complexity.</p><div class="vpy-details" aria-hidden="true"><ul class="vpy-list"><li>Collections, comprehensions</li><li>Basic algorithms & Big-O</li><li>Mini: Contact manager</li></ul></div></div>
+
+      <div class="vpy-week" data-week="4" tabindex="0" role="button"><h4>Module 4 — Python for Data Handling</h4><p>Pandas, NumPy, cleaning.</p><div class="vpy-details" aria-hidden="true"><ul class="vpy-list"><li>NumPy arrays & broadcasting</li><li>Pandas DataFrame ops</li><li>Mini: Sales data cleaning</li></ul></div></div>
+
+      <div class="vpy-week" data-week="5" tabindex="0" role="button"><h4>Module 5 — Data Visualization</h4><p>Matplotlib, Seaborn, dashboards.</p><div class="vpy-details" aria-hidden="true"><ul class="vpy-list"><li>Charts & pairplots</li><li>Dashboards: Streamlit/Plotly</li></ul></div></div>
+
+      <div class="vpy-week" data-week="6" tabindex="0" role="button"><h4>Module 6 — Math for AI</h4><p>Statistics, linear algebra, calculus.</p><div class="vpy-details" aria-hidden="true"><ul class="vpy-list"><li>Gradients, matrices, probability</li><li>Mini: gradient descent</li></ul></div></div>
+
+      <div class="vpy-week" data-week="7" tabindex="0" role="button"><h4>Module 7 — ML Foundations</h4><p>Pipeline, metrics, eval.</p><div class="vpy-details" aria-hidden="true"><ul class="vpy-list"><li>Train/val/test, CV</li><li>Metrics: precision/recall</li></ul></div></div>
+
+      <div class="vpy-week" data-week="8" tabindex="0" role="button"><h4>Module 8 — Supervised Learning</h4><p>Regression, trees, ensembles.</p><div class="vpy-details" aria-hidden="true"><ul class="vpy-list"><li>Linear/logistic regression</li><li>Random forest & boosting</li></ul></div></div>
+
+      <div class="vpy-week" data-week="9" tabindex="0" role="button"><h4>Module 9 — Unsupervised Learning</h4><p>Clustering & DR.</p><div class="vpy-details" aria-hidden="true"><ul class="vpy-list"><li>K-means, PCA, t-SNE</li></ul></div></div>
+
+      <div class="vpy-week" data-week="10" tabindex="0" role="button"><h4>Module 10 — Deep Learning Foundations</h4><p>NN basics & Keras.</p><div class="vpy-details" aria-hidden="true"><ul class="vpy-list"><li>Activation, loss, backprop</li></ul></div></div>
+
+      <div class="vpy-week" data-week="11" tabindex="0" role="button"><h4>Module 11 — ANN Deep Dive</h4><p>Regularization, optimizers.</p><div class="vpy-details" aria-hidden="true"><ul class="vpy-list"><li>Dropout, batchnorm, Adam/SGD</li></ul></div></div>
+
+      <div class="vpy-week" data-week="12" tabindex="0" role="button"><h4>Module 12 — CNN</h4><p>Conv layers & transfer learning.</p><div class="vpy-details" aria-hidden="true"><ul class="vpy-list"><li>Conv2D, pooling, pretrained nets</li></ul></div></div>
+
+      <div class="vpy-week" data-week="13" tabindex="0" role="button"><h4>Module 13 — RNN / LSTM / GRU</h4><p>Sequence models.</p><div class="vpy-details" aria-hidden="true"><ul class="vpy-list"><li>Time-series & text seq modeling</li></ul></div></div>
+
+      <div class="vpy-week" data-week="14" tabindex="0" role="button"><h4>Module 14 — NLP</h4><p>Tokenization & embeddings.</p><div class="vpy-details" aria-hidden="true"><ul class="vpy-list"><li>TF-IDF, embeddings, simple transformers</li></ul></div></div>
+
+      <div class="vpy-week" data-week="15" tabindex="0" role="button"><h4>Module 15 — Generative AI & LLMs</h4><p>Transformers & HuggingFace.</p><div class="vpy-details" aria-hidden="true"><ul class="vpy-list"><li>Attention, fine-tuning, prompts</li></ul></div></div>
+
+      <div class="vpy-week" data-week="16" tabindex="0" role="button"><h4>Module 16 — Deployment</h4><p>APIs, Docker, cloud.</p><div class="vpy-details" aria-hidden="true"><ul class="vpy-list"><li>FastAPI/Flask, Docker, cloud deploy</li></ul></div></div>
+
+      <div class="vpy-week" data-week="17" tabindex="0" role="button"><h4>Module 17 — Agents & Automation</h4><p>LangChain, vector DBs.</p><div class="vpy-details" aria-hidden="true"><ul class="vpy-list"><li>LangChain, Pinecone/Chroma, RPA</li></ul></div></div>
+
+      <div class="vpy-week" data-week="18" tabindex="0" role="button"><h4>Module 18 — Capstone & Career</h4><p>Project, portfolio, interviews.</p><div class="vpy-details" aria-hidden="true"><ul class="vpy-list"><li>Ship a capstone, docs, interviews</li></ul></div></div>
+
+    </div>
+
+    <div class="vpy-footer vpy-muted-small">Tip: Complete the mini-project for each module — hands-on > theory.</div>
+  </div>
+
+  <aside class="vpy-sidebar" aria-label="Roadmap controls">
+    <h3 style="margin-top:0">Controls</h3>
+    <div style="display:flex;flex-direction:column;gap:8px">
+      <button class="vpy-btn" id="vpy-sideExpandAll">Expand All</button>
+      <button class="vpy-btn" id="vpy-sideCollapseAll">Collapse All</button>
+      <button class="vpy-btn" id="vpy-sidePrint">Print / Export</button>
+    </div>
+
+    <div style="margin-top:12px">
+      <h4 style="margin:8px 0 6px 0">Extras</h4>
+      <p class="vpy-muted-small">Use this curriculum as a structured guide — compress or extend modules as needed.</p>
+    </div>
+
+    <footer style="margin-top:12px;color:#9fb0d3"><div>Created for: Vishnu</div></footer>
+  </aside>
+</div>
+
+<!-- namespaced JS (paste AFTER the markup above) -->
+<script>
+(function(){
+  /* Toggle behavior */
+  function toggleWeek(el, force){
+    const det = el.querySelector('.vpy-details');
+    if(!det) return;
+    const will = (typeof force === 'boolean') ? force : !el.classList.contains('vpy-open');
+    el.classList.toggle('vpy-open', will);
+    el.setAttribute('aria-expanded', will ? 'true' : 'false');
+    det.setAttribute('aria-hidden', will ? 'false' : 'true');
+  }
+
+  // attach handlers & show animation
+  const weeks = Array.from(document.querySelectorAll('.vpy-week'));
+  weeks.forEach((w,i)=>{
+    setTimeout(()=> w.classList.add('show'), i*50);
+    w.addEventListener('click', (e)=>{
+      if(e.target.tagName.toLowerCase() === 'a') return;
+      toggleWeek(w);
+      try{ localStorage.setItem('vpy-visited-'+w.dataset.week, 'true'); }catch(e){}
+    });
+    w.addEventListener('keydown', (e)=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); toggleWeek(w);} });
+  });
+
+  // controls
+  function expandAll(){ weeks.forEach(w=> toggleWeek(w, true)); }
+  function collapseAll(){ weeks.forEach(w=> toggleWeek(w, false)); }
+  document.getElementById('vpyExpandAll')?.addEventListener('click', expandAll);
+  document.getElementById('vpyCollapseAll')?.addEventListener('click', collapseAll);
+  document.getElementById('vpy-sideExpandAll')?.addEventListener('click', expandAll);
+  document.getElementById('vpy-sideCollapseAll')?.addEventListener('click', collapseAll);
+  function vpyPrint(){ window.print(); }
+  document.getElementById('vpyPrint')?.addEventListener('click', vpyPrint);
+  document.getElementById('vpy-sidePrint')?.addEventListener('click', vpyPrint);
+
+  // restore visited
+  weeks.forEach(w=>{ try{ if(localStorage.getItem('vpy-visited-'+w.dataset.week)==='true') toggleWeek(w, true); }catch(e){} });
+
+  /* ====== Three.js 3x3 cube (uses global THREE loaded above) ====== */
+  function initThree(){
+    if(typeof THREE === 'undefined') return setTimeout(initThree, 120);
+    const canvas = document.getElementById('vpy-three-canvas');
+    if(!canvas) return;
+    const renderer = new THREE.WebGLRenderer({canvas, antialias:true, alpha:true});
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 100);
+    camera.position.set(0,0,8);
+
+    function resize(){
+      const w = canvas.clientWidth || 220;
+      const h = canvas.clientHeight || 220;
+      renderer.setSize(w,h,false);
+      renderer.setPixelRatio(window.devicePixelRatio || 1);
+      camera.aspect = w/h;
+      camera.updateProjectionMatrix();
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    const light = new THREE.DirectionalLight(0xffffff, 0.9); light.position.set(5,5,5); scene.add(light);
+    scene.add(new THREE.AmbientLight(0xffffff, 0.2));
+
+    function roundRect(ctx,x,y,w,h,r){ ctx.beginPath(); ctx.moveTo(x+r,y); ctx.arcTo(x+w,y,x+w,y+h,r); ctx.arcTo(x+w,y+h,x,y+h,r); ctx.arcTo(x,y+h,x,y,r); ctx.arcTo(x,y,x+w,y,r); ctx.closePath(); }
+
+    function makeFaceTexture(label, bg, fg){
+      const size = 512; const cv = document.createElement('canvas'); cv.width = cv.height = size; const ctx = cv.getContext('2d');
+      ctx.fillStyle = bg; ctx.fillRect(0,0,size,size);
+      ctx.strokeStyle = 'rgba(255,255,255,0.06)'; ctx.lineWidth = 6;
+      const cell = size/3;
+      for(let i=1;i<3;i++){ ctx.beginPath(); ctx.moveTo(i*cell,0); ctx.lineTo(i*cell,size); ctx.stroke(); ctx.beginPath(); ctx.moveTo(0,i*cell); ctx.lineTo(size,i*cell); ctx.stroke(); }
+      ctx.fillStyle = fg; ctx.font='bold 90px Arial'; ctx.textAlign='center'; ctx.textBaseline='middle'; ctx.fillText(label, size/2, size/2);
+      ctx.font='14px Arial'; ctx.fillStyle='rgba(255,255,255,0.85)'; ctx.fillText(label, size/2, size - 28);
+      return new THREE.CanvasTexture(cv);
+    }
+
+    const faces = [
+      makeFaceTexture('HTML','#e44d26','#fff'),
+      makeFaceTexture('CSS','#2965f1','#fff'),
+      makeFaceTexture('JS','#f0db4f','#111'),
+      makeFaceTexture('REACT','#61dafb','#041226'),
+      makeFaceTexture('PYTHON','#306998','#ffd43b'),
+      makeFaceTexture('AI','#222','#fff')
+    ];
+    const materials = faces.map(t => new THREE.MeshStandardMaterial({map:t}));
+    const geo = new THREE.BoxGeometry(4,4,4);
+    const cube = new THREE.Mesh(geo, materials);
+    cube.rotation.x = 0.3; cube.rotation.y = -0.2; scene.add(cube);
+
+    // subtle edges
+    const edges = new THREE.EdgesGeometry(geo);
+    const edgeLines = new THREE.LineSegments(edges, new THREE.LineBasicMaterial({color:0x0a2540}));
+    scene.add(edgeLines);
+
+    let isDragging=false, prev={x:0,y:0};
+    canvas.addEventListener('pointerdown', e=>{ isDragging=true; prev.x=e.clientX; prev.y=e.clientY; canvas.setPointerCapture?.(e.pointerId); });
+    canvas.addEventListener('pointerup', ()=> isDragging=false);
+    canvas.addEventListener('pointermove', e=>{ if(!isDragging) return; const dx=(e.clientX-prev.x)/200; const dy=(e.clientY-prev.y)/200; cube.rotation.y+=dx; cube.rotation.x+=dy; prev.x=e.clientX; prev.y=e.clientY; });
+
+    const ray = new THREE.Raycaster(); const mouse = new THREE.Vector2();
+    renderer.domElement.addEventListener('pointerdown',(e)=>{
+      const rect = renderer.domElement.getBoundingClientRect();
+      mouse.x = ((e.clientX-rect.left)/rect.width)*2-1;
+      mouse.y = -((e.clientY-rect.top)/rect.height)*2+1;
+      ray.setFromCamera(mouse, camera);
+      const hits = ray.intersectObject(cube, true);
+      if(hits.length){
+        const faceIndex = Math.floor(hits[0].faceIndex/2);
+        const mapping = ['web','web','web','web','python','ai']; // map faces to page ids
+        const id = mapping[faceIndex] || 'home';
+        // attempt to navigate by switching pages (if your app uses hash routing)
+        if(typeof location !== 'undefined'){ location.hash = id; }
+        // visual feedback (optional): toggle open first week when navigating to python
+        if(id === 'python'){ const first = document.querySelector('.vpy-week[data-week="1"]'); if(first) toggleWeek(first, true); }
+      }
+    });
+
+    const clock = new THREE.Clock(); const speed = 1.5;
+    (function animate(){ requestAnimationFrame(animate); const dt = clock.getDelta(); if(!isDragging){ cube.rotation.y += dt * 0.9 * speed; cube.rotation.x += dt * 0.3 * speed; } renderer.render(scene, camera); })();
+  }
+
+  initThree();
+})();
+</script>
+      <!-- ====== END: Insertable Python+AI Roadmap ====== -->
+      </div>
+    </section>
+
+    <footer>
+      &copy; 2024 Learning Hub. We Are Always Ready To Teach New Technology with ❤️ for aspiring developers.
+    </footer>
+  </main>
+
+  <!-- Basic scripts: Three.js module script removed to avoid duplicates. The local cube scripts above handle textures responsively. -->
+
+  <!-- Roadmap expand/collapse script + routing + mobile nav behaviour -->
+  <script>
+    document.addEventListener('DOMContentLoaded', ()=>{
+      const weeks = Array.from(document.querySelectorAll('#python .week'));
+      weeks.forEach((w,i)=> setTimeout(()=> w.classList.add('show'), i*70));
+
+      weeks.forEach(w=>{ w.addEventListener('click', ()=> w.classList.toggle('open')); });
+
+      const expandBtn = document.getElementById('pyExpandAll');
+      const collapseBtn = document.getElementById('pyCollapseAll');
+      const printBtn = document.getElementById('pyPrint');
+
+      if(expandBtn) expandBtn.addEventListener('click', ()=> weeks.forEach(w=> w.classList.add('open')));
+      if(collapseBtn) collapseBtn.addEventListener('click', ()=> weeks.forEach(w=> w.classList.remove('open')));
+      if(printBtn) printBtn.addEventListener('click', ()=> window.print());
+
+      // mobile nav toggle
+      const navToggle = document.getElementById('navToggle'); const mobileNav = document.getElementById('mobileNav');
+      navToggle.addEventListener('click', ()=>{
+        const expanded = navToggle.getAttribute('aria-expanded') === 'true';
+        navToggle.setAttribute('aria-expanded', String(!expanded));
+        mobileNav.style.display = expanded ? 'none' : 'block';
+        mobileNav.setAttribute('aria-hidden', String(expanded));
+      });
+
+      // close mobile nav when clicking a link
+      mobileNav.querySelectorAll('a').forEach(a=> a.addEventListener('click', ()=>{ mobileNav.style.display='none'; navToggle.setAttribute('aria-expanded','false'); mobileNav.setAttribute('aria-hidden','true'); }));
+    });
+
+    // Simple hash-based routing + nav handling
+    const pages = document.querySelectorAll('.page');
+    const nav = document.getElementById('mainNav');
+    function showPage(id){ pages.forEach(p=>p.classList.toggle('active', p.id===id));
+      nav.querySelectorAll('a').forEach(a=>a.classList.toggle('active', a.dataset.target===id));
+      document.getElementById('mobileNav').querySelectorAll('a').forEach(a=> a.classList.toggle('active', a.dataset.target===id));
+      window.scrollTo({top:0,behavior:'smooth'});
+    }
+
+    document.querySelectorAll('a[data-target]').forEach(a=>{ a.addEventListener('click',(e)=>{ e.preventDefault(); const t=a.dataset.target; location.hash = t; showPage(t); }); });
+    const initial = location.hash ? location.hash.replace('#','') : 'home'; showPage(initial);
+    window.addEventListener('hashchange', ()=>{ const id = location.hash.replace('#','')||'home'; showPage(id); });
+  </script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
